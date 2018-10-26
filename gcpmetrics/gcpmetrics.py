@@ -184,7 +184,7 @@ def perform_query(client, metric_id, days, hours, minutes,
 
     else:
         # print the whole dataset
-        print(dataframe)
+        print(dataframe.to_string())
 
 
 def process(keyfile, config, project_id, list_resources, list_metrics, query, metric_id, days, hours, minutes,
