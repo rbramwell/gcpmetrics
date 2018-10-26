@@ -162,6 +162,10 @@ Supported --align parameters:
   - ALIGN_STDDEV
   - ALIGN_COUNT_TRUE
   - ALIGN_FRACTION_TRUE
+  - ALIGN_PERCENTILE_99
+  - ALIGN_PERCENTILE_95
+  - ALIGN_PERCENTILE_50
+  - ALIGN_PERCENTILE_05
 
 Supported --reduce parameters:
 
