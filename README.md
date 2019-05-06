@@ -137,7 +137,8 @@ $ gcpmetrics --keyfile ./keyfile.json \
     --query --days 2 \
     --metric appengine.googleapis.com/system/cpu/usage \
     --reduce REDUCE_SUM \
-    --align ALIGN_SUM
+    --align ALIGN_SUM \
+    --align-period-seconds 300
 
 ALIGN: ALIGN_SUM seconds: 172800.0
 REDUCE: REDUCE_SUM grouping: None
@@ -366,32 +367,34 @@ usage: gcpmetrics [-h] [--version] [--init-config DIR] [--config FILE]
                   [--list-resources] [--list-metrics] [--query] [--service ID]
                   [--metric ID] [--infinite] [--days INT] [--hours INT]
                   [--minutes INT] [--resource-filter S] [--metric-filter S]
-                  [--align A] [--reduce R] [--reduce-grouping R] [--iloc00]
+                  [--align A] [--align-period-seconds A] [--reduce R]
+                  [--reduce-grouping R] [--iloc00]
 
 Google Cloud Monitoring API Command Line
 Website: https://github.com/odin-public/gcpmetrics
 
 optional arguments:
-  -h, --help           show this help message and exit
-  --version            Print gcpmetics version and exit.
-  --init-config DIR    Location of configuration files.
-  --config FILE        Local configuration *.yaml file to be used.
-  --keyfile FILE       Goolge Cloud Platform service account key file.
-  --preset ID          Preset ID, like http_response_5xx_sum, etc.
-  --project ID         Project ID.
-  --list-resources     List monitored resource descriptors and exit.
-  --list-metrics       List available metric descriptors and exit.
-  --query              Run the time series query.
-  --service ID         Service ID.
-  --metric ID          Metric ID as defined by Google Monitoring API.
-  --infinite           Calculate time delta since the dawn of time.
-  --days INT           Days from now to calculate the query start date.
-  --hours INT          Hours from now to calculate the query start date.
-  --minutes INT        Minutes from now to calculate the query start date.
-  --resource-filter S  Filter of resources in the var:val[,var:val] format.
-  --metric-filter S    Filter of metrics in the var:val[,var:val] format.
-  --align A            Alignment of data ALIGN_NONE, ALIGN_SUM. etc.
-  --reduce R           Reduce of data REDUCE_NONE, REDUCE_SUM, etc.
-  --reduce-grouping R  Reduce grouping in the var1[,var2] format.
-  --iloc00             Print value from the table index [0:0] only.
+  -h, --help                show this help message and exit
+  --version                 Print gcpmetics version and exit.
+  --init-config DIR         Location of configuration files.
+  --config FILE             Local configuration *.yaml file to be used.
+  --keyfile FILE            Goolge Cloud Platform service account key file.
+  --preset ID               Preset ID, like http_response_5xx_sum, etc.
+  --project ID              Project ID.
+  --list-resources          List monitored resource descriptors and exit.
+  --list-metrics            List available metric descriptors and exit.
+  --query                   Run the time series query.
+  --service ID              Service ID.
+  --metric ID               Metric ID as defined by Google Monitoring API.
+  --infinite                Calculate time delta since the dawn of time.
+  --days INT                Days from now to calculate the query start date.
+  --hours INT               Hours from now to calculate the query start date.
+  --minutes INT             Minutes from now to calculate the query start date.
+  --resource-filter S       Filter of resources in the var:val[,var:val] format.
+  --metric-filter S         Filter of metrics in the var:val[,var:val] format.
+  --align A                 Alignment of data ALIGN_NONE, ALIGN_SUM. etc.
+  --align-period-seconds A  Alignment period in seconds.  Default: 300 seconds.
+  --reduce R                Reduce of data REDUCE_NONE, REDUCE_SUM, etc.
+  --reduce-grouping R       Reduce grouping in the var1[,var2] format.
+  --iloc00                  Print value from the table index [0:0] only.
 ```

@@ -4,63 +4,9 @@
 
 {
   "type": "service_account",
-  "project_id": "...",
-   ...
-}
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-~                                                                                                                                                                                                                 
-"./keyfile.json" 12L, 2344C
-
-
-
-
-
-
-
-ce_account",
   "project_id": "imc-hub-us-central-demo1",
   "private_key_id": "463e51219a069a0d338bb10a23eae5e01dd21b9e",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDKTtclwpmja/Q7\nxY8qnye5KCSPuy42EoOQfZvJfvZoIN9HZ8eKXoeYuDB5KZjJFVxt3th+P+H0Pyqj\nL+wpI7iIBr1tC7viRxuBbp+sgEdkwQW
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDKTtclwpmja/Q7\nxY8qnye5KCSPuy42EoOQfZvJfvZoIN9HZ8eKXoeYuDB5KZjJFVxt3th+P+H0Pyqj\nL+wpI7iIBr1tC7viRxuBbp+sgEdkwQW",
   "client_email": "imc-hub-us-central-demo1@appspot.gserviceaccount.com",
   "client_id": "111368010698332321277",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
