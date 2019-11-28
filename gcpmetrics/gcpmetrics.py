@@ -249,7 +249,7 @@ def apply_configs(args_dict):
 
     if local_preset:
         for p in args_dict.keys():
-            if _ret[p] is None:
+            if _ret[p] is None or _ret[p] == 0:
                 if p in local_preset:
                     _ret[p] = local_preset[p]
 
@@ -306,7 +306,7 @@ def main():
         _filter = _filter.split(',')
         _ret = {}
         for res in _filter:
-            key, value = res.split(':')
+            key, value = res.split(':', 1)
             _ret[key] = value
         return _ret
 
