@@ -2,11 +2,12 @@
 
 from __future__ import print_function
 
-import os
-import sys
-import shutil
 import argparse
 import datetime
+import os
+import shutil
+import sys
+
 import yaml
 from google.cloud import monitoring_v3
 from google.cloud.monitoring_v3 import query as gcm_v3_query
@@ -221,13 +222,13 @@ def apply_configs(args_dict):
 
     _ret = args_dict
     for p in args_dict.keys():
-        if _ret[p] is None:
+        if _ret[p] is None or _ret[p] == 0:
             if p in local_config:
                 _ret[p] = local_config[p]
 
     _ret = args_dict
     for p in args_dict.keys():
-        if _ret[p] is None:
+        if _ret[p] is None or _ret[p] == 0:
             if p in global_config:
                 _ret[p] = global_config[p]
 
@@ -255,7 +256,7 @@ def apply_configs(args_dict):
 
     if global_preset:
         for p in args_dict.keys():
-            if _ret[p] is None:
+            if _ret[p] is None or _ret[p] == 0:
                 if p in global_preset:
                     _ret[p] = global_preset[p]
 
