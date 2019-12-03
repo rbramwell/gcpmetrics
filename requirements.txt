@@ -1,5 +1,6 @@
 twine==1.13.0
 flake8==3.7.7
 google-cloud-monitoring==0.31.1
+google-cloud-storage==1.23.0
 pandas==0.24.2
 PyYAML==5.1

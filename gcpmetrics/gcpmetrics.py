@@ -9,7 +9,7 @@ import shutil
 import sys
 
 import yaml
-from google.cloud import monitoring_v3
+from google.cloud import monitoring_v3, storage
 from google.cloud.monitoring_v3 import query as gcm_v3_query
 
 parser = argparse.ArgumentParser(
@@ -23,6 +23,7 @@ parser.add_argument('--config', help='Local configuration *.yaml file to be used
 parser.add_argument('--keyfile', help='Goolge Cloud Platform service account key file.', metavar='FILE')
 parser.add_argument('--preset', help='Preset ID, like http_response_5xx_sum, etc.', metavar='ID')
 parser.add_argument('--project', help='Project ID.', metavar='ID')
+parser.add_argument('--list-buckets', default=None, action='store_true', help='List buckets and exit.')
 parser.add_argument('--list-resources', default=None, action='store_true', help='List monitored resource descriptors and exit.')
 parser.add_argument('--list-metrics', default=None, action='store_true', help='List available metric descriptors and exit.')
 parser.add_argument('--query', default=None, action='store_true', help='Run the time series query.')
@@ -87,6 +88,12 @@ def list_metric_descriptors(client, project_name):
         print('\tdescription: {}'.format(descriptor.description.encode('utf-8')))
         print()
 
+def list_bucket_names(client, project_name):
+
+    index = 0
+    for bucket in client.list_buckets(project='hdg-demo'):
+        index += 1
+        print(bucket.name)
 
 def perform_query(client, project_id, metric_id, days, hours, minutes, resource_filter, metric_filter,
                   align, align_period_seconds, reduce, reduce_grouping, iloc00):
@@ -147,7 +154,7 @@ def perform_query(client, project_id, metric_id, days, hours, minutes, resource_
         print(dataframe.to_string())
 
 
-def process(keyfile, config, project_id, list_resources, list_metrics, query, metric_id, days, hours, minutes,
+def process(keyfile, config, project_id, list_resources, list_metrics, list_buckets, query, metric_id, days, hours, minutes,
             resource_filter, metric_filter, align, align_period_seconds, reduce, reduce_grouping, iloc00):
 
     client = None
@@ -160,6 +167,7 @@ def process(keyfile, config, project_id, list_resources, list_metrics, query, me
         # --keyfile not specified, use interactive `gcloud auth login`
         client = monitoring_v3.MetricServiceClient()
         project_name = client.project_path(project_id)
+        storage_client = storage.Client()
     else:
         _file = keyfile
         # file is relative to config (if present)
@@ -167,6 +175,7 @@ def process(keyfile, config, project_id, list_resources, list_metrics, query, me
             _file = os.path.join(os.path.split(config)[0], keyfile)
 
         client = monitoring_v3.MetricServiceClient.from_service_account_json(_file)
+        storage_client = storage.Client.from_service_account_json(_file)
         project_name = client.project_path(project_id)
 
     if list_resources:
@@ -174,6 +183,9 @@ def process(keyfile, config, project_id, list_resources, list_metrics, query, me
 
     elif list_metrics:
         list_metric_descriptors(client, project_name)
+
+    elif list_buckets:
+        list_bucket_names(storage_client, project_name)
 
     elif query:
         perform_query(client, project_id, metric_id, days, hours, minutes, resource_filter, metric_filter,
@@ -328,6 +340,7 @@ def main():
         args_dict['project'],
         args_dict['list_resources'],
         args_dict['list_metrics'],
+        args_dict['list_buckets'],
         args_dict['query'],
         args_dict['metric'],
         int(args_dict['days']),
