@@ -89,9 +89,8 @@ def list_metric_descriptors(client, project_name):
         print()
 
 def list_bucket_names(client, project_name):
-
     index = 0
-    for bucket in client.list_buckets(project='hdg-demo'):
+    for bucket in client.list_buckets(project=project_name):
         index += 1
         print(bucket.name)
 
@@ -185,7 +184,7 @@ def process(keyfile, config, project_id, list_resources, list_metrics, list_buck
         list_metric_descriptors(client, project_name)
 
     elif list_buckets:
-        list_bucket_names(storage_client, project_name)
+        list_bucket_names(storage_client, project_id)
 
     elif query:
         perform_query(client, project_id, metric_id, days, hours, minutes, resource_filter, metric_filter,
