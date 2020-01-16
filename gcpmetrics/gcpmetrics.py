@@ -138,8 +138,7 @@ def perform_query(client, project_id, metric_id, days, hours, minutes, resource_
     if iloc00:
         if len(dataframe) == 0:
             # No dataset = zero
-            # print('0')
-            None
+            print('0')
 
         else:
             # print "top left" element of the table only, asusming it's the only one left
