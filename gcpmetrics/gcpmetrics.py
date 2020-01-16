@@ -144,6 +144,9 @@ def perform_query(client, project_id, metric_id, days, hours, minutes, resource_
         else:
             # print "top left" element of the table only, asusming it's the only one left
             # see http://pandas.pydata.org/pandas-docs/stable/10min.html for details
+
+            # RO 16-01-2020 I disabled these asserts, if you query for cloudsql.googleapis.com/database/state there's no way
+            # to set a timeframe that always returns a single value. If you set 2 minutes it will occasionally return 0 or 2 results
             # assert len(dataframe) == 1
             # assert len(dataframe.iloc[0]) == 1
             print(dataframe.iloc[0, 0])
