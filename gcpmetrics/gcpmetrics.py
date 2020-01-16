@@ -41,7 +41,6 @@ parser.add_argument('--reduce', default=None, help='Reduce of data REDUCE_NONE, 
 parser.add_argument('--reduce-grouping', default=None, help='Reduce grouping in the var1[,var2] format.', metavar='R')
 parser.add_argument('--iloc00', default=None, action='store_true', help='Print value from the table index [0:0] only.')
 
-
 def error(message):
     sys.stderr.write('error: {}'.format(message))
     print()
@@ -139,13 +138,14 @@ def perform_query(client, project_id, metric_id, days, hours, minutes, resource_
     if iloc00:
         if len(dataframe) == 0:
             # No dataset = zero
-            print('0')
+            # print('0')
+            None
 
         else:
             # print "top left" element of the table only, asusming it's the only one left
             # see http://pandas.pydata.org/pandas-docs/stable/10min.html for details
-            assert len(dataframe) == 1
-            assert len(dataframe.iloc[0]) == 1
+            # assert len(dataframe) == 1
+            # assert len(dataframe.iloc[0]) == 1
             print(dataframe.iloc[0, 0])
 
     else:
