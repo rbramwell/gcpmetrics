@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from __future__ import print_function
+
 
 import argparse
 import datetime
@@ -55,19 +55,19 @@ def list_monitored_resource_descriptors(client, project_name):
     index = 0
     for descriptor in client.list_monitored_resource_descriptors(project_name):
         index += 1
-        print('Resource descriptor #{}'.format(index))
-        print('\tname: {}'.format(descriptor.name))
-        print('\ttype: {}'.format(descriptor.type))
-        print('\tdisplay_name: {}'.format(descriptor.display_name))
-        print('\tdescription: {}'.format(descriptor.description))
+        print(('Resource descriptor #{}'.format(index)))
+        print(('\tname: {}'.format(descriptor.name)))
+        print(('\ttype: {}'.format(descriptor.type)))
+        print(('\tdisplay_name: {}'.format(descriptor.display_name)))
+        print(('\tdescription: {}'.format(descriptor.description)))
         print('\tlabels:')
         subindex = 0
         for label in descriptor.labels:
             subindex += 1
-            print('\t\tLabel descriptor #{}'.format(subindex))
-            print('\t\t\tkey: {}'.format(label.key))
-            print('\t\t\tvalue_type: {}'.format(label.value_type))
-            print('\t\t\tdescription: {}'.format(label.description))
+            print(('\t\tLabel descriptor #{}'.format(subindex)))
+            print(('\t\t\tkey: {}'.format(label.key)))
+            print(('\t\t\tvalue_type: {}'.format(label.value_type)))
+            print(('\t\t\tdescription: {}'.format(label.description)))
         print()
 
 
@@ -77,21 +77,21 @@ def list_metric_descriptors(client, project_name):
     index = 0
     for descriptor in client.list_metric_descriptors(project_name):
         index += 1
-        print('Metric descriptor #{}'.format(index))
-        print('\tname: {}'.format(descriptor.name))
-        print('\ttype: {}'.format(descriptor.type))
-        print('\tmetric_kind: {}'.format(descriptor.metric_kind))
-        print('\tvalue_type: {}'.format(descriptor.value_type))
-        print('\tunit: {}'.format(descriptor.unit))
-        print('\tdisplay_name: {}'.format(descriptor.display_name))
-        print('\tdescription: {}'.format(descriptor.description.encode('utf-8')))
+        print(('Metric descriptor #{}'.format(index)))
+        print(('\tname: {}'.format(descriptor.name)))
+        print(('\ttype: {}'.format(descriptor.type)))
+        print(('\tmetric_kind: {}'.format(descriptor.metric_kind)))
+        print(('\tvalue_type: {}'.format(descriptor.value_type)))
+        print(('\tunit: {}'.format(descriptor.unit)))
+        print(('\tdisplay_name: {}'.format(descriptor.display_name)))
+        print(('\tdescription: {}'.format(descriptor.description.encode('utf-8'))))
         print()
 
 def list_bucket_names(client, project_name):
     index = 0
     for bucket in client.list_buckets(project=project_name):
         index += 1
-        print(bucket.name)
+        print((bucket.name))
 
 def perform_query(client, project_id, metric_id, days, hours, minutes, resource_filter, metric_filter,
                   align, align_period_seconds, reduce, reduce_grouping, iloc00):
@@ -119,19 +119,19 @@ def perform_query(client, project_id, metric_id, days, hours, minutes, resource_
 
     if align:
         if not iloc00:
-            print('ALIGN: {} seconds: {}'.format(align, align_period_seconds))
+            print(('ALIGN: {} seconds: {}'.format(align, align_period_seconds)))
         query = query.align(align, seconds=align_period_seconds)
 
     if reduce:
         if not iloc00:
-            print('REDUCE: {} grouping: {}'.format(reduce, reduce_grouping))
+            print(('REDUCE: {} grouping: {}'.format(reduce, reduce_grouping)))
         if reduce_grouping:
             query = query.reduce(reduce, *reduce_grouping)
         else:
             query = query.reduce(reduce)
 
     if not iloc00:
-        print('QUERY: {}'.format(query.filter))
+        print(('QUERY: {}'.format(query.filter)))
 
     dataframe = query.as_dataframe()
 
@@ -148,11 +148,11 @@ def perform_query(client, project_id, metric_id, days, hours, minutes, resource_
             # to set a timeframe that always returns a single value. If you set 2 minutes it will occasionally return 0 or 2 results
             # assert len(dataframe) == 1
             # assert len(dataframe.iloc[0]) == 1
-            print(dataframe.iloc[0, 0])
+            print((dataframe.iloc[0, 0]))
 
     else:
         # print the whole dataset
-        print(dataframe.to_string())
+        print((dataframe.to_string()))
 
 
 def process(keyfile, config, project_id, list_resources, list_metrics, list_buckets, query, metric_id, days, hours, minutes,
@@ -200,23 +200,23 @@ def init_config(args_dict):
 
     _dir = args_dict['init_config']
     if not os.path.exists(_dir):
-        print('Creating folder: {}'.format(_dir))
+        print(('Creating folder: {}'.format(_dir)))
         os.makedirs(_dir)
 
     _path = os.path.split(os.path.abspath(__file__))[0]
     _from = os.path.join(_path, 'config-template.yaml')
     _to = os.path.join(_dir, 'config.yaml')
-    print('Creating configuration file: {}'.format(_to))
+    print(('Creating configuration file: {}'.format(_to)))
 
     shutil.copyfile(_from, _to)
 
     _path = os.path.split(os.path.abspath(__file__))[0]
     _from = os.path.join(_path, 'keyfile-template.json')
     _to = os.path.join(_dir, 'keyfile.json')
-    print('Creating (empty) key file: {}'.format(_to))
+    print(('Creating (empty) key file: {}'.format(_to)))
     shutil.copyfile(_from, _to)
 
-    print("Configuration created, use '--config {}' to reference it.".format(_dir))
+    print(("Configuration created, use '--config {}' to reference it.".format(_dir)))
     return 0
 
 
@@ -234,13 +234,13 @@ def apply_configs(args_dict):
         stream.close()
 
     _ret = args_dict
-    for p in args_dict.keys():
+    for p in list(args_dict.keys()):
         if _ret[p] is None or _ret[p] == 0:
             if p in local_config:
                 _ret[p] = local_config[p]
 
     _ret = args_dict
-    for p in args_dict.keys():
+    for p in list(args_dict.keys()):
         if _ret[p] is None or _ret[p] == 0:
             if p in global_config:
                 _ret[p] = global_config[p]
@@ -262,13 +262,13 @@ def apply_configs(args_dict):
         error('Preset {} not found in either local or global configudation files'.format(preset_id))
 
     if local_preset:
-        for p in args_dict.keys():
+        for p in list(args_dict.keys()):
             if _ret[p] is None or _ret[p] == 0:
                 if p in local_preset:
                     _ret[p] = local_preset[p]
 
     if global_preset:
-        for p in args_dict.keys():
+        for p in list(args_dict.keys()):
             if _ret[p] is None or _ret[p] == 0:
                 if p in global_preset:
                     _ret[p] = global_preset[p]
@@ -289,7 +289,7 @@ def main():
     args_dict = vars(parser.parse_args())
 
     if args_dict['version']:
-        print(version())
+        print((version()))
         return 0
 
     if args_dict['init_config']:
