@@ -1,2 +1,6 @@
 /env/*
 /dist/*
+.direnv
+.envrc
+.vscode
+*.spec
